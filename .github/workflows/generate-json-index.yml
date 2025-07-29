@@ -15,8 +15,6 @@ jobs:
     steps:
       - name: 检出代码
         uses: actions/checkout@v4
-        with:
-          fetch-depth: 0  # 获取完整的提交历史，避免推送时出现分支错误
 
       - name: 设置 Node.js
         uses: actions/setup-node@v4
@@ -39,23 +37,10 @@ jobs:
         run: |
           git config --global user.name 'github-actions[bot]'
           git config --global user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          
-          # 显示工作区状态，用于调试
-          echo "========== 工作区状态 =========="
-          git status
-          
-          # 添加所有变化的文件，包括未跟踪文件
-          git add .
-          
-          # 检查是否有文件需要提交
-          if [[ $(git status --porcelain) ]]; then
-            echo "========== 提交变更 =========="
-            git commit -m '由Actions自动生成插件市场所需JSON索引'
-            git push
-            echo "========== 推送成功 =========="
-          else
-            echo "没有文件需要提交"
-          fi
+          git add publicFileIndex.json
+          git commit -m '由Actions自动生成插件市场所需JSON索引'
+          git push
+        
 
       - name: Delete workflow runs
         uses: Mattraks/delete-workflow-runs@main

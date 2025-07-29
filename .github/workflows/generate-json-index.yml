@@ -11,6 +11,9 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write  # 允许修改仓库内容
+      workflows: write  # 允许修改工作流文件
 
     steps:
       - name: 检出代码

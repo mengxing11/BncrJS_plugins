@@ -32,5 +32,7 @@ jobs:
           git add publicFileIndex.json
           git commit -m '由Actions自动生成插件市场所需JSON索引'
           git push
+      - name: Add package-lock.json
+        run: git add package-lock.json
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

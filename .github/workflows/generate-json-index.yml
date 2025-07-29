@@ -11,15 +11,10 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    permissions:
-      contents: write  # 允许修改仓库内容
-      workflows: write  # 允许修改工作流文件
 
     steps:
       - name: 检出代码
         uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
 
       - name: 设置 Node.js
         uses: actions/setup-node@v4
@@ -28,24 +23,13 @@ jobs:
 
       - name: 安装依赖
         run: |
+          pwd
+          ls -l
           cd .github/workflows
           npm install
 
-      - name: 检查目录结构
-        run: |
-          echo "当前工作目录：$(pwd)"
-          ls -l
-          if [ -d "plugins" ]; then
-            echo "plugins 目录存在"
-          else
-            echo "错误：plugins 目录不存在"
-            exit 1
-          fi
-
       - name: 由Actions自动生成插件市场所需JSON索引
-        run: |
-          cd $GITHUB_WORKSPACE
-          node .github/workflows/generate_index.js
+        run: node .github/workflows/generate_index.js
 
       - name: 提交并推送更改
         env:
@@ -53,23 +37,10 @@ jobs:
         run: |
           git config --global user.name 'github-actions[bot]'
           git config --global user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          
-          # 显示工作区状态
-          echo "========== 工作区状态 =========="
-          git status
-          
-          # 明确添加索引文件和package-lock.json
-          git add publicFileIndex.json .github/workflows/package-lock.json
-          
-          # 检查是否有变更需要提交
-          if [[ $(git status --porcelain) ]]; then
-            echo "========== 提交变更 =========="
-            git commit -m '由Actions自动生成插件市场所需JSON索引'
-            git push
-            echo "========== 推送成功 =========="
-          else
-            echo "没有文件需要提交"
-          fi
+          git add publicFileIndex.json
+          git commit -m '由Actions自动生成插件市场所需JSON索引'
+          git push
+        
 
       - name: Delete workflow runs
         uses: Mattraks/delete-workflow-runs@main

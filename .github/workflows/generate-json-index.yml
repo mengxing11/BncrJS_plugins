@@ -30,7 +30,8 @@ jobs:
           git config --global user.name 'github-actions[bot]'
           git config --global user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git add publicFileIndex.json package-lock.json
-          git commit -m '由Actions自动生成插件市场所需JSON索引'
+          git commit -m '由Actions自动生成插件市场所需JSON索引' || echo "No changes to commit"
+          git pull origin main --rebase
           git push
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

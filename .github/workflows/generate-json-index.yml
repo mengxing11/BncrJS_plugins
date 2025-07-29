@@ -13,11 +13,6 @@ jobs:
     steps:
       - name: 检出代码
         uses: actions/checkout@v2
-        with:
-          # 确保获取完整的提交历史
-          fetch-depth: 0
-          # 允许推送回仓库
-          persist-credentials: true
 
       - name: 设置 Node.js
         uses: actions/setup-node@v2
@@ -30,35 +25,12 @@ jobs:
       - name: 由Actions自动生成插件市场所需JSON索引
         run: node .github/workflows/generate_index.js
 
-      - name: 检查变更并提交
+      - name: 提交并推送更改
         run: |
-          # 输出当前状态用于调试
-          echo "检查文件变更状态:"
-          git status
-          
-          # 添加所有变更文件，包括package-lock.json和publicFileIndex.json
-          git add publicFileIndex.json package-lock.json
-          
-          # 检查是否有文件变更
-          if [[ -n $(git status --porcelain) ]]; then
-            echo "检测到文件变更，准备提交..."
-            
-            # 配置Git用户信息
-            git config --global user.name 'github-actions[bot]'
-            git config --global user.email '41898282+github-actions[bot]@users.noreply.github.com'
-            
-            # 提交变更
-            git commit -m '由Actions自动生成插件市场所需JSON索引'
-            
-            # 输出提交信息用于调试
-            echo "提交内容:"
-            git log -1
-            
-            # 推送变更
-            git push
-            echo "变更已推送到远程仓库"
-          else
-            echo "没有检测到文件变更，跳过提交步骤"
-          fi
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add publicFileIndex.json
+          git commit -m '由Actions自动生成插件市场所需JSON索引'
+          git push
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

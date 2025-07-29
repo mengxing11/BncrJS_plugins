@@ -1,1 +1,1 @@
-# BncrJS_plugins
+小白一枚，结合AI瞎几把写的，自用

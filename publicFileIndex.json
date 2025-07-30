@@ -5,7 +5,7 @@
     "name": "IP变化通知",
     "author": "mengxin",
     "team": "小寒寒-萌欣二改",
-    "version": "1.2.5",
+    "version": "1.0.0",
     "description": "IP变化通知，变化后执行用户自定义命令，多线路的请勿使用",
     "classification": [
       "工具"

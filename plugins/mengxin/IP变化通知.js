@@ -7,7 +7,7 @@
  * @rule ^IP变化通知$
  * @description IP变化通知，变化后执行用户自定义命令，多线路的请勿使用
  * @admin true
- * @public false
+ * @public true
  * @priority 1000
  * @cron 0 *\/3 * * * *
  * @classification ["工具"]

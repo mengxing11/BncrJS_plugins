@@ -1,3 +1,25 @@
 {
-  "annotation": "该文件由系统自动生成. 用于插件市场索引,请勿编辑该文件中的任何内容"
+  "annotation": "该文件由系统自动生成. 用于插件市场索引,请勿编辑该文件中的任何内容",
+  "a67jZZJtlpHFkgreqUE/+HumVc4=": {
+    "type": "github",
+    "name": "IP变化通知",
+    "author": "mengxin",
+    "team": "小寒寒-萌欣二改",
+    "version": "1.2.5",
+    "description": "IP变化通知，变化后执行用户自定义命令，多线路的请勿使用",
+    "classification": [
+      "工具"
+    ],
+    "filename": "IP变化通知.js",
+    "fileDir": "/plugins/mengxin/IP变化通知.js",
+    "systemVersionRange": "",
+    "isCron": false,
+    "isAdapter": false,
+    "isMod": false,
+    "isService": false,
+    "isAuthentication": false,
+    "isEncPlugin": false,
+    "id": "a67jZZJtlpHFkgreqUE/+HumVc4=",
+    "isChatPlugin": true
+  }
 }
